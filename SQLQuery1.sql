@@ -1,0 +1,1 @@
+﻿SELECT COUNT(*) as 'count' FROM Jobs WHERE MONTH(dateCreated) = (MONTH(GETDATE()) -1) and deleted <> 1
