@@ -142,6 +142,20 @@ public class Util
         }
     }
 
+    public static decimal SDC(object unsafeDecimal)
+    {
+        try
+        {
+            decimal value = new decimal();
+            decimal.TryParse(unsafeDecimal.ToString(), out value);
+            return value;
+        }
+        catch(Exception ex)
+        {
+            return 0.0m;
+        }
+    }
+
     public static string ConvertSHA512(string input)
     {
         try

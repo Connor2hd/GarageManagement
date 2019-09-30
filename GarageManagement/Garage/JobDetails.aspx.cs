@@ -23,6 +23,7 @@ public partial class Garage_JobDetails : System.Web.UI.Page
             {
                 LoadNotes();
                 LoadData();
+                LoadBillables();
             }
         }
         catch (Exception ex)
@@ -77,6 +78,30 @@ public partial class Garage_JobDetails : System.Web.UI.Page
         }
     }
 
+    protected void LoadBillables()
+    {
+        try
+        {
+            string sql = "select D.firstName + ' ' + D.lastName as fullName, A.dateCreated as dateEntered, * from JobBillables as A " +
+                "left join Jobs as B on A.jobRowId=B.rowId " +
+                "left join Users as C on A.employeeRowId=C.rowId " +
+                "left join Employees as D on C.rowId=D.userId " +
+                "where A.jobRowId=@jobId";
+
+            List<SqlParameter> param = new List<SqlParameter>();
+            param.Add(new SqlParameter("@jobId", ViewState["jobId"]));
+
+            DataTable dt = Util.DoQuery(sql, param);
+
+            rptJobBillables.DataSource = dt;
+            rptJobBillables.DataBind();
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
+
     protected void btnSubmitNewNote_Click(object sender, EventArgs e)
     {
         try
@@ -95,6 +120,40 @@ public partial class Garage_JobDetails : System.Web.UI.Page
             }
         }
         catch (Exception ex)
+        {
+
+        }
+    }
+
+    protected void btnSubmitNewTask_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            UserManager user = (UserManager)HttpContext.Current.Session["user"];
+            string sql = "insert into JobBillables (jobRowId, employeeRowId, internalNote, task, partsBillable, labourBillable) " +
+                "values (@jobRowId, @employeeRowId, @internalNote, @task, @partsBillable, @labourBillable)";
+
+            List<SqlParameter> param = new List<SqlParameter>();
+            param.Add(new SqlParameter("@jobRowId", ViewState["jobId"]));
+            param.Add(new SqlParameter("@employeeRowId", user.RowId));
+            param.Add(new SqlParameter("@internalNote", txtNotes.Text.ToString()));
+            param.Add(new SqlParameter("@task", txtTaskTitle.Text.ToString()));
+            param.Add(new SqlParameter("@partsBillable", txtPartsCost.Text.ToString()));
+
+            decimal labourBillable = Convert.ToDecimal(txtLabourHours.Text) * Convert.ToDecimal(txtLabourBillableRate.Text);
+
+            param.Add(new SqlParameter("@labourBillable", labourBillable));
+
+            if (Util.DoNonQuery(sql, param) > 0)
+            {
+                LoadBillables();
+                txtTaskTitle.Text = "";
+                txtLabourHours.Text = "";
+                txtPartsCost.Text = "";
+                txtNotes.Text = "";
+            }
+        }
+        catch(Exception ex)
         {
 
         }

@@ -52,8 +52,8 @@
                     <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
                         <i class="fas fa-info"></i>About </a>
                     <div class="dash-nav-dropdown-menu">
-                        <a href="https://github.com/HackerThemes/spur-template" target="_blank" class="dash-nav-dropdown-item">GitHub</a>
-                        <a href="http://hackerthemes.com" target="_blank" class="dash-nav-dropdown-item">HackerThemes</a>
+                        <a href="https://github.com/Connor2hd" target="_blank" class="dash-nav-dropdown-item">GitHub</a>
+                        <a href="http://http://connormackay.ca/" target="_blank" class="dash-nav-dropdown-item">HackerThemes</a>
                     </div>
                 </div>
             </nav>
@@ -72,7 +72,7 @@
                     <input type="text" class="searchbox-input" placeholder="type to search">
                 </form>
                 <div class="tools">
-                    <a href="https://github.com/HackerThemes/spur-template" target="_blank" class="tools-item">
+                    <a href="https://github.com/Connor2hd" target="_blank" class="tools-item">
                         <i class="fab fa-github"></i>
                     </a>
                     <a href="#!" class="tools-item">
