@@ -21,11 +21,11 @@ public partial class Garage_Jobs : System.Web.UI.Page
     {
         try
         {
-            string sql = "SELECT *, firstName + ' ' + lastName as 'fullName' FROM Customers WHERE deleted <> 1";
+            string sql = "SELECT *, firstName + ' ' + lastName as fullName FROM Customers WHERE deleted <> 1";
             List<SqlParameter> param = new List<SqlParameter>();
             if (Util.SSC(txtCustomerSearch.Text) != "")
             {
-                sql += " AND 'fullName' LIKE '%' + @customerName + '%'";
+                sql += " AND firstName + ' ' + lastName LIKE '%' + @customerName + '%'";
                 param.Add(new SqlParameter("@customerName", Util.SSC(txtCustomerSearch.Text)));
             }
             DataTable dt = Util.DoQuery(sql, param);
@@ -34,14 +34,14 @@ public partial class Garage_Jobs : System.Web.UI.Page
             ddlCustomer.DataTextField = "fullName";
             ddlCustomer.DataBind();
 
-            sql = "SELECT *, firstName + ' ' + lastName as 'fullName' FROM Employees WHERE DELETED <> 1";
+            sql = "SELECT *, firstName + ' ' + lastName as fullName FROM Employees WHERE DELETED <> 1";
             param = new List<SqlParameter>();
             if (Util.SSC(txtEmployeeSearch.Text) != "")
             {
-                sql += " AND 'fullName' LIKE '%' + @employeeName + '%'";
+                sql += " AND firstName + ' ' + lastName LIKE '%' + @employeeName + '%'";
                 param.Add(new SqlParameter("@employeeName", Util.SSC(txtEmployeeSearch.Text)));
             }
-            dt = Util.DoQuery(sql, null);
+            dt = Util.DoQuery(sql, param);
             ddlEmployee.DataSource = dt;
             ddlEmployee.DataValueField = "rowId";
             ddlEmployee.DataTextField = "fullName";

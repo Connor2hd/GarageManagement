@@ -11,11 +11,16 @@ public partial class Garage_CustomerDetails : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        ViewState["customerId"] = Util.SGC(Request["customerId"]);
+        if(Util.SGC(ViewState["customerId"]) == Guid.Empty)
+        {
+            Response.Redirect("Customer.aspx", false);
+        }
+
         if (Page.IsPostBack == false)
         {
             Util.FillProvinces(ddlProvince, true);
             Util.FillCountries(ddlCountry, true);
-            ViewState["customerId"] = Util.SGC(Request["customerId"]);
             LoadData();
         }
     }

@@ -24,7 +24,7 @@ public class Util
     {
         try
         {
-            string connString = "Server=tcp:connor1234.database.windows.net,1433;Initial Catalog=connor;Persist Security Info=False;User ID=connor;Password=Rising!Sun55;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connString = "Server=tcp:192.168.0.21,1433;Initial Catalog=GarageManagement;Persist Security Info=False;User ID=garage;Password=garagemanagement;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -57,7 +57,7 @@ public class Util
     {
         try
         {
-            string connString = "Server=tcp:connor1234.database.windows.net,1433;Initial Catalog=connor;Persist Security Info=False;User ID=connor;Password=Rising!Sun55;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connString = "Server=tcp:192.168.0.21,1433;Initial Catalog=GarageManagement;Persist Security Info=False;User ID=garage;Password=garagemanagement;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
